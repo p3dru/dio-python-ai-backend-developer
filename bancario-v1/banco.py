@@ -19,15 +19,17 @@ while True:
     if opcao == 'd':
         print('Operação de Depósito: ')
         valor = float(input('Digite o valor que deseja depositar: '))
-        saldo += valor
-        mensagem_extrato = f'Adicionado R${valor:.2f} ao saldo'
-        extrato.append(mensagem_extrato)
+        if valor > 0:
+            saldo += valor
+            mensagem_extrato = f'Adicionado R${valor:.2f} ao saldo'
+            extrato.append(mensagem_extrato)
+        else:
+            print("Valor inválido para depósito")
 
     elif opcao == 's':
         print('Operação de Saque:')
-        valor = float(input('Digite o valor que deseja sacar: '))
-
         if numero_saques_feitos < LIMITE_SAQUE:
+            valor = float(input('Digite o valor que deseja sacar: '))
             if valor <= limite_por_saque:
                 if saldo > valor:
                     saldo -= valor
@@ -43,7 +45,7 @@ while True:
 
     elif opcao == 'e':
         print('Operação de Extrato: ')
-        if extrato.__len__ == 0:
+        if len(extrato) == 0:
             print('Não foram realizadas movimentações')
         
         else:
